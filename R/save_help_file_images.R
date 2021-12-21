@@ -7,38 +7,41 @@
 #'
 #' @export
 
-save_help_file_images <- function(delete_existing_pngs =  FALSE) {
+save_help_file_images <- function(rd_files = NULL, delete_existing_pngs =  FALSE) {
   # list of all help files
-  all_rd_files <-
-    list.files(here::here("man")) %>%
-    purrr::keep(~ stringr::str_ends(., stringr::fixed(".Rd"))) %>%
-    stringr::str_remove(".Rd")
+  if (is.null(rd_files)) {
+    rd_files <-
+      list.files(here::here("man")) %>%
+      purrr::keep(~ stringr::str_ends(., stringr::fixed(".Rd"))) %>%
+      stringr::str_remove(".Rd")
+  }
 
-  # create temp gtsummary directory (example scripts will be saved here)
+  # create temp directory (example objects will be saved here)
   path_tempdir <- file.path(tempdir(), "save_help_file_images")
   fs::dir_create(path_tempdir)
-  unlink(path_tempdir) # just in case it already existed with files in folder
 
   # delete existing png example images
   if (isTRUE(delete_existing_pngs)) {
-  list.files(here::here("man", "figures")) %>%
-    purrr::keep(~ (stringr::str_ends(., "_ex[:digit:]+.png") | stringr::str_ends(., "_ex.png")) &
-                  !stringr::str_starts(., "README-")) %>%
-    purrr::walk(~ fs::file_delete(here::here("man", "figures", .x)))
+    list.files(here::here("man", "figures")) %>%
+      purrr::keep(~ (stringr::str_ends(., "_ex[:digit:]+.png") | stringr::str_ends(., "_ex.png")) &
+                    !stringr::str_starts(., "README-")) %>%
+      purrr::walk(~ fs::file_delete(here::here("man", "figures", .x)))
   }
 
   # cycling over each help file, and saving gt images
   gtsummary::set_gtsummary_theme(list("pkgwide-lgl:quiet" = TRUE))
-  for (f in all_rd_files) {
+  for (f in rd_files) {
     cli::cli_alert_success("Working on {f}")
 
     # run code from example
-    utils::example(topic = f, package = "gtsummary", character.only = TRUE, give.lines = FALSE, echo = FALSE)
+    utils::example(topic = f, package = "gtsummary", character.only = TRUE,
+                   give.lines = FALSE, echo = FALSE)
 
     # get list of example objects that end in "_ex###"
-    example_objs <- ls()[stringr::str_ends(ls(), "_ex[:digit:]+") | stringr::str_ends(ls(), "_ex")]
+    example_objs <-
+      ls()[stringr::str_ends(ls(), "_ex[:digit:]+") | stringr::str_ends(ls(), "_ex")]
 
-    # saving an image of every gt or gtsummary example
+    # saving an image of every gt, gtsummary, or flextable example
     purrr::walk(
       example_objs,
       function(example_chr) {
