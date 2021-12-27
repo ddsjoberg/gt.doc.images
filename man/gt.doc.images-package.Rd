@@ -8,6 +8,13 @@
 \description{
 Exports functions to assist in creating help file documents that contain images of gtsummary, gt, and flextable images.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{http://www.danieldsjoberg.com/gt.doc.images/}
+}
+
+}
 \author{
 \strong{Maintainer}: Daniel D. Sjoberg \email{danield.sjoberg@gmail.com}
 

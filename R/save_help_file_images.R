@@ -4,10 +4,13 @@
 #' Object names must end in `_ex` or `_ex[:digit:]`
 #'
 #' @param delete_existing_pngs Logical
+#' @param pkg Name of package
+#' @param rd_files Character vector of Rd file names to search. Default is all
+#' Rd files.
 #'
 #' @export
 
-save_help_file_images <- function(rd_files = NULL, delete_existing_pngs =  FALSE) {
+save_help_file_images <- function(pkg, rd_files = NULL, delete_existing_pngs =  FALSE) {
   # list of all help files
   if (is.null(rd_files)) {
     rd_files <-
@@ -34,7 +37,7 @@ save_help_file_images <- function(rd_files = NULL, delete_existing_pngs =  FALSE
     cli::cli_alert_success("Working on {f}")
 
     # run code from example
-    utils::example(topic = f, package = "gtsummary", character.only = TRUE,
+    utils::example(topic = f, package = pkg, character.only = TRUE,
                    give.lines = FALSE, echo = FALSE)
 
     # get list of example objects that end in "_ex###"

@@ -4,9 +4,14 @@
 \alias{save_help_file_images}
 \title{Save Rd File Images}
 \usage{
-save_help_file_images(delete_existing_pngs = FALSE)
+save_help_file_images(pkg, rd_files = NULL, delete_existing_pngs = FALSE)
 }
 \arguments{
+\item{pkg}{Name of package}
+
+\item{rd_files}{Character vector of Rd file names to search. Default is all
+Rd files.}
+
 \item{delete_existing_pngs}{Logical}
 }
 \description{
