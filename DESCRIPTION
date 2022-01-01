@@ -1,28 +1,28 @@
 Package: gt.doc.images
 Title: Save Help File Images
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre"))
-Description: Exports functions to assist in creating help file documents
-    that contain images of gtsummary, gt, and flextable images.
+Description: Exports tools for creating help file documents that contain
+    images of 'gtsummary', 'gt', and 'flextable' images.
 License: MIT + file LICENSE
+URL: http://www.danieldsjoberg.com/gt.doc.images/
 Imports: 
     cli (>= 3.1.0),
     flextable (>= 0.6.10),
-    fs (>= 1.5.1),
+    fs (>= 1.5.2),
     gt (>= 0.3.1),
     gtsummary (>= 1.5.0),
     here (>= 1.0.1),
-    magrittr,
+    magrittr (>= 2.0.1),
     purrr (>= 0.3.4),
-    rlang,
+    rlang (>= 0.4.12),
     stringr (>= 1.4.0),
-    usethis,
+    usethis (>= 2.1.5),
     webshot (>= 0.5.2),
-    webshot2
+    webshot2 
 Remotes: 
     rstudio/webshot2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-URL: http://www.danieldsjoberg.com/gt.doc.images/

@@ -6,7 +6,7 @@
 \alias{gt.doc.images-package}
 \title{gt.doc.images: Save Help File Images}
 \description{
-Exports functions to assist in creating help file documents that contain images of gtsummary, gt, and flextable images.
+Exports tools for creating help file documents that contain images of 'gtsummary', 'gt', and 'flextable' images.
 }
 \seealso{
 Useful links:
