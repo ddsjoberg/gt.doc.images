@@ -60,9 +60,9 @@ save_help_file_images <- function(path = here::here(),
     list.files(file.path(path, "man")) %>%
     purrr::keep(~ str_ends(., fixed(".Rd")))
   rd_files <- rd_files %||% all_rd_files
-  if (!rlang::is_empty(setdiff(all_rd_files, rd_files))) {
+  if (!rlang::is_empty(setdiff(rd_files, all_rd_files))) {
     paste("The following are not {.file .Rd} files in the package.",
-          "{.file {setdiff(all_rd_files, rd_files)}}", sep = "\n") %>%
+          "{.file {setdiff(rd_files, all_rd_files)}}", sep = "\n") %>%
       cli::cli_alert_danger()
     return(invisible())
   }
