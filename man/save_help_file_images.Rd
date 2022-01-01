@@ -4,15 +4,32 @@
 \alias{save_help_file_images}
 \title{Save Rd File Images}
 \usage{
-save_help_file_images(pkg, rd_files = NULL, delete_existing_pngs = FALSE)
+save_help_file_images(
+  path = here::here(),
+  pkg = basename(path),
+  rd_files = NULL,
+  delete_existing_pngs = NULL,
+  run.dontrun = TRUE,
+  run.donttest = TRUE
+)
 }
 \arguments{
-\item{pkg}{Name of package}
+\item{path}{path to package directory. Default is \code{here::here()}}
+
+\item{pkg}{Name of package. Default is the folder name in \verb{path=}}
 
 \item{rd_files}{Character vector of Rd file names to search. Default is all
-Rd files.}
+Rd files. Include the \code{.Rd} extension in the file names.}
 
-\item{delete_existing_pngs}{Logical}
+\item{delete_existing_pngs}{Logical indicating whether to delete all
+png files in the \verb{~/man/figures/} folder. Default is to ask interactively
+when \code{rd_files = NULL}. Otherwise, \code{FALSE}}
+
+\item{run.dontrun}{logical indicating that \verb{\\dontrun}
+    should be ignored.}
+
+\item{run.donttest}{logical indicating that \verb{\\donttest}
+    should be ignored.}
 }
 \description{
 Only objects of class gtsummary, gt, or flextable will be saved.

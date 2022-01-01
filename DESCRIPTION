@@ -15,7 +15,9 @@ Imports:
     here (>= 1.0.1),
     magrittr,
     purrr (>= 0.3.4),
+    rlang,
     stringr (>= 1.4.0),
+    usethis,
     webshot (>= 0.5.2),
     webshot2
 Remotes: 
