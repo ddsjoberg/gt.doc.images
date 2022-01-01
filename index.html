@@ -55,7 +55,30 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="gtdocimages">gt.doc.images<a class="anchor" aria-label="anchor" href="#gtdocimages"></a>
 </h1></div>
-<p>Package exports a single function to create and save gtsummary, gt, and flextable images from package help files.</p>
+<p>Package exports a single function to create and save {gtsummary}, {gt}, and {flextable} images from package help files.</p>
+<p>Install package with</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ddsjoberg/gt.doc.images"</span><span class="op">)</span></code></pre></div>
+<p>Example below from the {gtsummary} package saving the example gt table images.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">&gt;</span><span class="st"> </span>gt.doc.images<span class="op">::</span><span class="kw">save_help_file_images</span>()</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; </span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; -- gtsummary (C:/Users/SjobergD/GitHub/gtsummary) ------------------------------</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; </span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; -- Working on add_ci.Rd </span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; √ Saving add_ci_ex1.png</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; -- Working on add_difference.Rd </span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; √ Saving add_difference_ex1.png</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; √ Saving add_difference_ex2.png</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; </span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; -- Working on tbl_split.Rd </span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; i No saved example objects in tbl_split.Rd</span></span></code></pre></div>
+<p>The saved images can be inserted into the help files to exhibit how the rendered tables appear. Include the following chunk in the {roxygen2} comments to insert an image.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#' @section Example Output:</span>
+<span class="co">#' \if{html}{Example 1}</span>
+<span class="co">#'</span>
+<span class="co">#' \if{html}{\figure{tbl_survfit_ex1.png}{options: width=55\%}}</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
