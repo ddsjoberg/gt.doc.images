@@ -20,6 +20,13 @@ save_help_file_images <- function(path = here::here(),
                                   delete_existing_pngs =  NULL,
                                   run.dontrun = TRUE, run.donttest = TRUE) {
   # check inputs ---------------------------------------------------------------
+  if (!rlang::is_empty(ls(envir = rlang::global_env()))) {
+    paste("This function writes and deletes objects in the global environment,",
+          "and the global environment is not empty!") %>%
+      cli::cli_alert_danger()
+    cli::cli_ul("Restart R and run {.code save_help_file_images()} in a fresh R session.")
+    return(invisible())
+  }
   if (!fs::dir_exists(path)) {
     cli::cli_alert_danger("The package path {.file {path}} does not exist.")
     return(invisible())

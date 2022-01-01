@@ -1,0 +1,59 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/ddsjoberg/gt.doc.images/workflows/R-CMD-check/badge.svg)](https://github.com/ddsjoberg/gt.doc.images/actions)
+[![CRAN status](https://www.r-pkg.org/badges/version/gt.doc.images)](https://cran.r-project.org/package=gt.doc.images)
+[![gt.doc.images status badge](https://ddsjoberg.r-universe.dev/badges/gt.doc.images)](https://ddsjoberg.r-universe.dev)
+<!-- badges: end -->
+
+# gt.doc.images
+
+Package exports a single function to create and save {gtsummary}, {gt}, and {flextable} images from package help files.
+
+Install package with
+
+```r
+remotes::install_github("ddsjoberg/gt.doc.images")
+```
+
+Example below from the {gtsummary} package saving the example gt table images.
+
+```r
+> gt.doc.images::save_help_file_images()
+#> 
+#> -- gtsummary (C:/Users/SjobergD/GitHub/gtsummary) ------------------------------
+#> 
+#> -- Working on add_ci.Rd 
+#> √ Saving add_ci_ex1.png
+#> 
+#> -- Working on add_difference.Rd 
+#> √ Saving add_difference_ex1.png
+#> √ Saving add_difference_ex2.png
+#> 
+#> -- Working on tbl_split.Rd 
+#> i No saved example objects in tbl_split.Rd
+```
+
+The saved images can be inserted into the help files to exhibit how the rendered tables appear.
+Include the following chunk in the {roxygen2} comments to insert an image.
+
+```r
+#' @section Example Output:
+#' \if{html}{Example 1}
+#'
+#' \if{html}{\figure{tbl_survfit_ex1.png}{options: width=55\%}}
+```
