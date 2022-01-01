@@ -32,6 +32,11 @@ save_help_file_images <- function(path = here::here(),
     return(invisible())
   }
   cli::cli_h1("{.pkg {pkg}} ({.file {path}})")
+  if (!pkg %in% rownames(utils::installed.packages())) {
+    cli::cli_alert_danger("Package {.pkg {pkg}} is not installed.")
+    cli::cli_ul("Install the package, restart R, and try again.")
+    return(invisible())
+  }
 
   path_figures <- file.path(path, "man", "figures")
   if (!fs::dir_exists(path_figures)) {

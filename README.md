@@ -3,8 +3,6 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/ddsjoberg/gt.doc.images/workflows/R-CMD-check/badge.svg)](https://github.com/ddsjoberg/gt.doc.images/actions)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/gt.doc.images)](https://cran.r-project.org/package=gt.doc.images)
 [![gt.doc.images status
 badge](https://ddsjoberg.r-universe.dev/badges/gt.doc.images)](https://ddsjoberg.r-universe.dev)
 <!-- badges: end -->
@@ -14,10 +12,12 @@ badge](https://ddsjoberg.r-universe.dev/badges/gt.doc.images)](https://ddsjoberg
 Package exports a single function to create and save {gtsummary}, {gt},
 and {flextable} images from package help files.
 
-Install package with
+Install package from the R Universe with
 
 ``` r
-remotes::install_github("ddsjoberg/gt.doc.images")
+install.packages('gt.doc.images', 
+                 repos = c(ddsjoberg = 'https://ddsjoberg.r-universe.dev',
+                           CRAN = 'https://cloud.r-project.org'))
 ```
 
 Example below from the {gtsummary} package saving the example gt table
