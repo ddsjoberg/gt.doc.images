@@ -1,3 +1,11 @@
+#' Shrink Rd File Images
+#'
+#' @inheritParams save_help_file_images
+#' @param image_files Character vector of .png file names to shrink. Default is all
+#' png files in the `~/man/figures` folder that end with `_ex[digits].png`
+#' or `_ex.png` that do not begin with `README-`.
+#'
+#' @export
 
 shrink_help_file_images <- function(path = here::here(),
                                     pkg = basename(path),
