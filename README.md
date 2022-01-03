@@ -9,8 +9,14 @@ badge](https://ddsjoberg.r-universe.dev/badges/gt.doc.images)](https://ddsjoberg
 
 # gt.doc.images
 
-Package exports a single function to create and save {gtsummary}, {gt},
-and {flextable} images from package help files.
+Package exports two functions
+
+-   `save_help_file_images()`: create and save {gtsummary}, {gt}, and
+    {flextable} images from package help files.
+
+-   `shrink_help_file_images()`: shrink the help file images using
+    `webshot::shrink()`. Use this function if the help files increase
+    the build size of your package over the CRAN limit of 5MB
 
 Install package from the R Universe with
 

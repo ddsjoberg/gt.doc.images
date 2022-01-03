@@ -56,6 +56,7 @@ save_help_file_images <- function(path = here::here(),
   }
 
   # set list of all rd files ---------------------------------------------------
+  # pick all files in folder that ends with ".Rd"
   all_rd_files <-
     list.files(file.path(path, "man")) %>%
     purrr::keep(~ str_ends(., fixed(".Rd")))
@@ -73,6 +74,7 @@ save_help_file_images <- function(path = here::here(),
 
   # delete existing png example images
   if (isTRUE(delete_existing_pngs)) {
+    # pick files that end with "_ex[any integer].png" or "_ex.png" that does not starts with "READNE-"
     list.files(path_figures) %>%
       purrr::keep(~ (str_ends(., "_ex[:digit:]+.png") | str_ends(., "_ex.png")) &
                     !str_starts(., "README-")) %>%
@@ -96,7 +98,7 @@ save_help_file_images <- function(path = here::here(),
                      run.donttest = run.donttest)
     )
 
-    # get list of example objects that end in "_ex###"
+    # get list of example objects that end in "_ex###" or "_ex"
     example_objs <-
       ls(envir = rlang::global_env())[str_ends(ls(envir = rlang::global_env()), "_ex[:digit:]+") | str_ends(ls(envir = rlang::global_env()), "_ex")]
 
@@ -131,17 +133,6 @@ save_help_file_images <- function(path = here::here(),
                                      path = file.path(path_figures, str_glue("{example_chr}.png"))
             )
           }
-
-          # shrink image
-          shrink_it <-
-            tryCatch(
-              utils::capture.output(
-                webshot::shrink(file.path(path_figures, str_glue("{example_chr}.png")))
-              ),
-              error = function(e) {
-                return(invisible())
-              }
-            )
         }
       )
       rm(list = example_objs, envir = rlang::global_env())

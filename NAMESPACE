@@ -2,6 +2,7 @@
 
 export(save_help_file_images)
 importFrom(magrittr,"%>%")
+importFrom(prettyunits,pretty_bytes)
 importFrom(purrr,"%||%")
 importFrom(stringr,fixed)
 importFrom(stringr,str_ends)
