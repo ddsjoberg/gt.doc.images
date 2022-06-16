@@ -1,6 +1,6 @@
 Package: gt.doc.images
 Title: Save Help File Images
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre"))
 Description: Exports tools for creating help file documents that contain
@@ -22,8 +22,6 @@ Imports:
     usethis (>= 2.1.5),
     webshot (>= 0.5.2),
     webshot2 
-Remotes: 
-    rstudio/webshot2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
