@@ -1,6 +1,6 @@
 Package: gt.doc.images
 Title: Save Help File Images
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: 
     person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = c("aut", "cre"))
 Description: Exports tools for creating help file documents that contain

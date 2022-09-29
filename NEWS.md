@@ -1,3 +1,7 @@
+# gt.doc.images 0.3.0
+
+* Added `save_help_file_images(path.output=)` argument to direct the location where the images will be saved.
+
 # gt.doc.images 0.2.1
 
 * Depending on {webshot2} from CRAN (instead of GH).
