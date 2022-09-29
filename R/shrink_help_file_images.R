@@ -9,7 +9,8 @@
 
 shrink_help_file_images <- function(path = here::here(),
                                     pkg = basename(path),
-                                    image_files = NULL) {
+                                    image_files = NULL,
+                                    path.output = file.path(path, "man", "figures")) {
   # check inputs ---------------------------------------------------------------
   if (!fs::dir_exists(path)) {
     cli::cli_alert_danger("The package path {.file {path}} does not exist.")
@@ -17,16 +18,15 @@ shrink_help_file_images <- function(path = here::here(),
   }
   cli::cli_h1("{.pkg {pkg}} ({.file {path}})")
 
-  path_figures <- file.path(path, "man", "figures")
-  if (!fs::dir_exists(path_figures)) {
-    cli::cli_alert_danger("The package figures path {.file {path_figures}} does not exist.")
+  if (!fs::dir_exists(path.output)) {
+    cli::cli_alert_danger("The package figures path {.file {path.output}} does not exist.")
     return(invisible())
   }
 
   # set list of all image files ------------------------------------------------
   all_image_files <-
-    list.files(path_figures, pattern = "_ex[[:digit:]]+.png$") %>%
-    union(list.files(path_figures, pattern = "_ex.png$")) %>%
+    list.files(path.output, pattern = "_ex[[:digit:]]+.png$") %>%
+    union(list.files(path.output, pattern = "_ex.png$")) %>%
     purrr::discard(~startsWith(., "README-"))
   image_files <- image_files %||% all_image_files
   if (!rlang::is_empty(setdiff(image_files, all_image_files))) {
@@ -42,18 +42,18 @@ shrink_help_file_images <- function(path = here::here(),
   for (f in image_files) {
     cli::cli_h3("Working on {.file {f}}")
 
-    original_size <- file.size(file.path(path_figures, f))
+    original_size <- file.size(file.path(path.output, f))
     original_size_all <- c(original_size_all, original_size)
     tryCatch(
       utils::capture.output(
-        webshot::shrink(file.path(path_figures, f))
+        webshot::shrink(file.path(path.output, f))
       )
       ,
       error = function(e) {
         return(invisible())
       }
     )
-    shrink_size <- file.size(file.path(path_figures, f))
+    shrink_size <- file.size(file.path(path.output, f))
     shrink_size_all <- c(shrink_size_all, shrink_size)
     paste("Size reduction {pretty_bytes(original_size - shrink_size)}",
           "({pretty_bytes(original_size)} -> {pretty_bytes(shrink_size)})") %>%

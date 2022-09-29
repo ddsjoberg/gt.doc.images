@@ -10,6 +10,8 @@
 #' when `rd_files = NULL`. Otherwise, `FALSE`
 #' @param rd_files Character vector of Rd file names to search. Default is all
 #' Rd files. Include the `.Rd` extension in the file names.
+#' @param path.output directory where images will be saved. Default is
+#' `file.path(path, "man", "figures")`
 #' @inheritParams utils::example
 #'
 #' @export
@@ -18,7 +20,9 @@ save_help_file_images <- function(path = here::here(),
                                   pkg = basename(path),
                                   rd_files = NULL,
                                   delete_existing_pngs =  NULL,
-                                  run.dontrun = TRUE, run.donttest = TRUE) {
+                                  path.output = file.path(path, "man", "figures"),
+                                  run.dontrun = TRUE,
+                                  run.donttest = TRUE) {
   # check inputs ---------------------------------------------------------------
   if (!rlang::is_empty(ls(envir = rlang::global_env()))) {
     paste("This function writes and deletes objects in the global environment,",
@@ -38,9 +42,8 @@ save_help_file_images <- function(path = here::here(),
     return(invisible())
   }
 
-  path_figures <- file.path(path, "man", "figures")
-  if (!fs::dir_exists(path_figures)) {
-    cli::cli_alert_danger("The package figures path {.file {path_figures}} does not exist.")
+  if (!fs::dir_exists(path.output)) {
+    cli::cli_alert_danger("The package figures path {.file {path.output}} does not exist.")
     return(invisible())
   }
 
@@ -75,10 +78,10 @@ save_help_file_images <- function(path = here::here(),
   # delete existing png example images
   if (isTRUE(delete_existing_pngs)) {
     # pick files that end with "_ex[any integer].png" or "_ex.png" that does not starts with "READNE-"
-    list.files(path_figures) %>%
+    list.files(path.output) %>%
       purrr::keep(~ (str_ends(., "_ex[:digit:]+.png") | str_ends(., "_ex.png")) &
                     !str_starts(., "README-")) %>%
-      purrr::walk(~ fs::file_delete(file.path(path_figures, .x)))
+      purrr::walk(~ fs::file_delete(file.path(path.output, .x)))
   }
 
   # cycling over each help file, and saving the gt and flextable images
@@ -122,7 +125,7 @@ save_help_file_images <- function(path = here::here(),
           if (inherits(example_obj, "gt_tbl")) {
             # saving image
             gt::gtsave(example_obj,
-                       filename = file.path(path_figures, str_glue("{example_chr}.png"))
+                       filename = file.path(path.output, str_glue("{example_chr}.png"))
             )
           }
 
@@ -130,7 +133,7 @@ save_help_file_images <- function(path = here::here(),
           if (inherits(example_obj, "flextable")) {
             flextable::save_as_image(example_obj,
                                      webshot = "webshot2",
-                                     path = file.path(path_figures, str_glue("{example_chr}.png"))
+                                     path = file.path(path.output, str_glue("{example_chr}.png"))
             )
           }
         }

@@ -7,7 +7,8 @@
 shrink_help_file_images(
   path = here::here(),
   pkg = basename(path),
-  image_files = NULL
+  image_files = NULL,
+  path.output = file.path(path, "man", "figures")
 )
 }
 \arguments{
@@ -18,6 +19,9 @@ shrink_help_file_images(
 \item{image_files}{Character vector of .png file names to shrink. Default is all
 png files in the \verb{~/man/figures} folder that end with \verb{_ex[digits].png}
 or \verb{_ex.png} that do not begin with \verb{README-}.}
+
+\item{path.output}{directory where images will be saved. Default is
+\code{file.path(path, "man", "figures")}}
 }
 \description{
 Shrink Rd File Images

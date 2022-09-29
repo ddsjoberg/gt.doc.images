@@ -9,6 +9,7 @@ save_help_file_images(
   pkg = basename(path),
   rd_files = NULL,
   delete_existing_pngs = NULL,
+  path.output = file.path(path, "man", "figures"),
   run.dontrun = TRUE,
   run.donttest = TRUE
 )
@@ -24,6 +25,9 @@ Rd files. Include the \code{.Rd} extension in the file names.}
 \item{delete_existing_pngs}{Logical indicating whether to delete all
 png files in the \verb{~/man/figures/} folder. Default is to ask interactively
 when \code{rd_files = NULL}. Otherwise, \code{FALSE}}
+
+\item{path.output}{directory where images will be saved. Default is
+\code{file.path(path, "man", "figures")}}
 
 \item{run.dontrun}{logical indicating that \verb{\\dontrun}
     should be ignored.}
